@@ -22,6 +22,12 @@ document.addEventListener('mousemove', draw);
 document.addEventListener('mousedown', setPosition);
 document.addEventListener('mouseenter', setPosition);
 
+const clr = document.querySelector('.clear_btn');
+clr.addEventListener('mousedown', function(){
+          const context = canvas.getContext('2d');
+          context.clearRect(0, 0, canvas.width, canvas.height);
+});
+
 // new position from mouse event
 function setPosition(e) {
   pos.x = e.clientX;
@@ -83,12 +89,5 @@ function createButtons(){
 createButtons();
 
 
-function clear() {
-        const clr = document.querySelector('.clear_btn');
-        clr.addEventListener('mousedown', function(){
-          const context = canvas.getContext('2d');
-          context.clearRect(0, 0, canvas.width, canvas.height);
-        });
-}
-  
+
 
