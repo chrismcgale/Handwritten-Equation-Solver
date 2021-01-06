@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Simple example</title>
     <script type='text/javascript' src='http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.4.0/fabric.min.js'></script>
     <style type='text/css'>
         #sheet {
@@ -17,7 +16,13 @@
         }
     </script>
   </head>
-  <body>
+<body onload="init()">
+    <button id="Submit"> Submit Image</button>
+    <button id="Solve">Solve Equation</button>
+    <button id="Back">Back</button>
+    <button id="Reset">Reset Equation</button>
+
+    <p>Equation: <span id="equation"></span> </p>
     
            <canvas id="can" width="400" height="400" style="position:absolute;top:10%;left:10%;border:2px solid;"></canvas>
            <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
