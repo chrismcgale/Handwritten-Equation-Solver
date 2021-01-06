@@ -1,6 +1,6 @@
 const space = '500px';
 let colour = 'black';
- var canvas, ctx, flag = false,
+var canvas, ctx, flag = false,
 
 
 function init() {
@@ -22,6 +22,7 @@ function init() {
             findxy('out', e)
         }, false);
 }
+init()
 
 
 function createButtons(){
@@ -65,6 +66,7 @@ function sketch() {
         ctx.stroke();
         ctx.closePath();
 }
+sketch()
 
 function clear() {
         var m = confirm("Want to clear");
@@ -73,5 +75,6 @@ function clear() {
             document.getElementById("canvasimg").style.display = "none";
         }
 }
+clear()
 
 
