@@ -1,5 +1,6 @@
 const space = '500px';
 let colour = 'black';
+var stack = [];
 
 
 var canvas, ctx, flag = false,
@@ -144,7 +145,10 @@ function clear(){
 clear();
 
 function back(){
-
+   const ran = document.querySelector('.change');
+    ran.addEventListener('mousedown', function () {
+        colour = prompt("Enter a colour or hex code", "red of #aw12034");
+    });
 }
 back();
 
