@@ -84,11 +84,11 @@ createButtons();
 
 
 function clear() {
-        var m = confirm("Want to clear");
-        if (m) {
+        const clr = document.querySelector('.clear_btn');
+        clr.addEventListener('mousedown', function(){
             ctx.clearRect(0, 0, w, h);
             document.getElementById("canvasimg").style.display = "none";
-        }
+        });
 }
   
 
