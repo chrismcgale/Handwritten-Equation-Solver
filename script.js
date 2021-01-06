@@ -1,93 +1,47 @@
 const space = '500px';
 let colour = 'black';
-var stack = [];
 
 
-var canvas, ctx, flag = false,
-            prevX = 0,
-            currX = 0,
-            prevY = 0,
-            currY = 0,
-            dot_flag = false;
+function createGrid(num){
+    const container = document.querySelector('#container');
+    var i = 0;
+    while (i < num){
+        const row = document.createElement('div');
+        row.setAttribute('class', 'row');
+        var j = 0;
+        while (j < num){
+            const col = document.createElement('div');
+            const px = Math.round(500 / num);
 
-var x = "black",
-       y = 2;
+            col.style.height = px.toString(10)+'px';
 
-function init() {
-            canvas = document.getElementById('can');
-            ctx = canvas.getContext("2d");
-            w = canvas.width;
-            h = canvas.height;
-
-            canvas.addEventListener("mousemove", function (e) {
-                findxy('move', e)
-            }, false);
-            canvas.addEventListener("mousedown", function (e) {
-                findxy('down', e)
-            }, false);
-            canvas.addEventListener("mouseup", function (e) {
-                findxy('up', e)
-            }, false);
-            canvas.addEventListener("mouseout", function (e) {
-                findxy('out', e)
-            }, false);
-        }
-
-function draw() {
-            ctx.beginPath();
-            ctx.moveTo(prevX, prevY);
-            ctx.lineTo(currX, currY);
-            ctx.strokeStyle = x;
-            ctx.lineWidth = y;
-            ctx.stroke();
-            ctx.closePath();
-        }
-
-function erase() {
-            var m = confirm("Want to clear");
-            if (m) {
-                ctx.clearRect(0, 0, w, h);
-                document.getElementById("canvasimg").style.display = "none";
+            col.style.width = px.toString(10)+'px';
+            col.style.borderTop = "thin solid black";
+            col.style.borderLeft = "thin solid black";
+            col.style.cssFloat = "left";
+            col.setAttribute('class', 'cell');
+            row.setAttribute('class', 'col');
+            if (j === num -1){
+                col.style.borderRight = "thin solid black";
             }
-        }
-
-function save() {
-            document.getElementById("canvasimg").style.border = "2px solid";
-            var dataURL = canvas.toDataURL();
-            document.getElementById("canvasimg").src = dataURL;
-            document.getElementById("canvasimg").style.display = "inline";
-        }
-
-function findxy(res, e) {
-            if (res == 'down') {
-                prevX = currX;
-                prevY = currY;
-                currX = e.clientX - canvas.offsetLeft;
-                currY = e.clientY - canvas.offsetTop;
-
-                flag = true;
-                dot_flag = true;
-                if (dot_flag) {
-                    ctx.beginPath();
-                    ctx.fillStyle = x;
-                    ctx.fillRect(currX, currY, 2, 2);
-                    ctx.closePath();
-                    dot_flag = false;
-                }
+            if(i === num - 1){
+                col.style.borderBottom="thin solid black";
             }
-            if (res == 'up' || res == "out") {
-                flag = false;
-            }
-            if (res == 'move') {
-                if (flag) {
-                    prevX = currX;
-                    prevY = currY;
-                    currX = e.clientX - canvas.offsetLeft;
-                    currY = e.clientY - canvas.offsetTop;
-                    draw();
-                }
-            }
+            row.appendChild(col);
+            j++;
+
+
+
+
         }
+        row.style.clear='left';
+        container.appendChild(row);
+        i++;
+    }
+    sketch();
+}
+
+createGrid(64);
 
 function sketch(){
     let cells = document.querySelectorAll('.cell');
@@ -103,30 +57,48 @@ sketch();
 function createButtons(){
     const buts = document.querySelector('#btn_ctn');
     const clear_btn = document.createElement('button');
-    clear_btn.textContent = "Clear";
+    clear_btn.textContent = "clear";
     clear_btn.setAttribute('class', 'clear_btn');
     buts.appendChild(clear_btn);
 
-    const back_btn = document.createElement('button');
-    resize_btn.textContent = "Back";
-    resize_btn.setAttribute('class', 'back');
-    buts.appendChild(back_btn);
+    const resize_btn = document.createElement('button');
+    resize_btn.textContent = "resize";
+    resize_btn.setAttribute('class', 'resize_btn');
+    buts.appendChild(resize_btn);
 
-    const sub = document.createElement('button');
-    randomColour.textContent = "Submit Drawing";
-    randomColour.setAttribute('class', 'sub');
-    buts.appendChild(sub);
+    const randomColour = document.createElement('button');
+    randomColour.textContent = "random colour";
+    randomColour.setAttribute('class', 'randomColour');
+    buts.appendChild(randomColour);
 
-    const solve = document.createElement('button');
-    blackColour.textContent = "Solve Equation";
-    blackColour.setAttribute('class', 'solve');
-    buts.appendChild(solve);
+    const blackColour = document.createElement('button');
+    blackColour.textContent = "black";
+    blackColour.setAttribute('class', 'black');
+    buts.appendChild(blackColour);
 
+    const changeColour = document.createElement('button');
+    changeColour.textContent = "change";
+    changeColour.setAttribute('class', 'change');
+    buts.appendChild(changeColour);
 }
 
 createButtons();
 
 
+function reSize() {
+    const resize = document.querySelector('.resize_btn');
+    resize.addEventListener('mousedown', function () {
+        let cells = document.querySelectorAll('.cell');
+        cells.forEach((cell) =>{
+            cell.remove();
+        });
+        var num = prompt("Enter n by n:", "16");
+        createGrid(num);
+
+    });
+
+}
+reSize();
 
 
 function clear(){
@@ -144,19 +116,41 @@ function clear(){
 }
 clear();
 
-function back(){
-   const ran = document.querySelector('.change');
+function random(){
+    const ran = document.querySelector('.randomColour');
+    ran.addEventListener('mousedown', function () {
+        let dic =['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
+        let i = 0;
+        let hex = '';
+        while(i < 6){
+            let r = Math.floor((Math.random() * 16) + 1);
+            hex = hex + dic[r-1];
+            i++;
+        }
+        colour = '#' + hex;
+        ran.style.backgroundColor = colour;
+
+    })
+}
+random();
+
+function black(){
+    const ran = document.querySelector('.black');
+    ran.addEventListener('mousedown', function () {
+        colour = 'black';
+        const r = document.querySelector('.randomColour');
+        r.style.backgroundColor = 'transparent';
+
+    });
+}
+
+black();
+
+function change(){
+    const ran = document.querySelector('.change');
     ran.addEventListener('mousedown', function () {
         colour = prompt("Enter a colour or hex code", "red of #aw12034");
     });
 }
-back();
 
-function sub(){
-}
-sub();
-
-function solve(){
-
-}
-solve();
+change();
