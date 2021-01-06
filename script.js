@@ -26,6 +26,10 @@ function setPosition(e) {
   pos.y = e.clientY;
 }
 
+function resize() {
+  ctx.canvas.width = window.innerWidth;
+  ctx.canvas.height = window.innerHeight;
+}
 
 function draw(e) {
   // mouse left button must be pressed
