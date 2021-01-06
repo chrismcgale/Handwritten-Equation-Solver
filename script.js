@@ -106,17 +106,17 @@ function createButtons(){
     clear_btn.setAttribute('class', 'clear_btn');
     buts.appendChild(clear_btn);
 
-    const resize_btn = document.createElement('button');
+    const back_btn = document.createElement('button');
     resize_btn.textContent = "Back";
     resize_btn.setAttribute('class', 'back');
     buts.appendChild(back);
 
-    const randomColour = document.createElement('button');
+    const sub = document.createElement('button');
     randomColour.textContent = "Submit Drawing";
     randomColour.setAttribute('class', 'sub');
     buts.appendChild(sub);
 
-    const blackColour = document.createElement('button');
+    const solve = document.createElement('button');
     blackColour.textContent = "Solve Equation";
     blackColour.setAttribute('class', 'solve');
     buts.appendChild(solve);
