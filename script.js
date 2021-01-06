@@ -16,7 +16,6 @@ resize();
 // last known position
 var pos = { x: 0, y: 0 };
 
-window.addEventListener('resize', resize);
 document.addEventListener('mousemove', draw);
 document.addEventListener('mousedown', setPosition);
 document.addEventListener('mouseenter', setPosition);
@@ -27,11 +26,6 @@ function setPosition(e) {
   pos.y = e.clientY;
 }
 
-// resize canvas
-function resize() {
-  ctx.canvas.width = window.innerWidth;
-  ctx.canvas.height = window.innerHeight;
-}
 
 function draw(e) {
   // mouse left button must be pressed
@@ -41,7 +35,6 @@ function draw(e) {
 
   ctx.lineWidth = 5;
   ctx.lineCap = 'round';
-  ctx.strokeStyle = '#c0392b';
 
   ctx.moveTo(pos.x, pos.y); // from
   setPosition(e);
@@ -82,37 +75,6 @@ function createButtons(){
 
 createButtons();
 
-function findxy(res, e) {
-        if (res == 'down') {
-            prevX = currX;
-            prevY = currY;
-            currX = e.clientX - canvas.offsetLeft;
-            currY = e.clientY - canvas.offsetTop;
-    
-            flag = true;
-            dot_flag = true;
-            if (dot_flag) {
-                ctx.beginPath();
-                ctx.fillStyle = x;
-                ctx.fillRect(currX, currY, 2, 2);
-                ctx.closePath();
-                dot_flag = false;
-            }
-        }
-        if (res == 'up' || res == "out") {
-            flag = false;
-        }
-        if (res == 'move') {
-            if (flag) {
-                prevX = currX;
-                prevY = currY;
-                currX = e.clientX - canvas.offsetLeft;
-                currY = e.clientY - canvas.offsetTop;
-                draw();
-            }
-        }
-}
-
 
 function clear() {
         var m = confirm("Want to clear");
@@ -121,6 +83,5 @@ function clear() {
             document.getElementById("canvasimg").style.display = "none";
         }
 }
-clear()
 
 
