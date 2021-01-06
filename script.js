@@ -109,7 +109,7 @@ function createButtons(){
     const back_btn = document.createElement('button');
     resize_btn.textContent = "Back";
     resize_btn.setAttribute('class', 'back');
-    buts.appendChild(back);
+    buts.appendChild(back_btn);
 
     const sub = document.createElement('button');
     randomColour.textContent = "Submit Drawing";
