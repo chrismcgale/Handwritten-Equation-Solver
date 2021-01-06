@@ -1,0 +1,23 @@
+button {
+    background-color: white;
+    border: 1px solid;
+    padding: 10px 35px;
+    font-size: 12px;
+    white-space: nowrap;
+    margin: 15px 10px 15px 10px;
+
+    font-family: 'Lato', 'Helvetica', 'Arial', 'sans-serif';
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 300px;
+}
+button:hover{
+    color: #0056b3;
+}
+
+body{
+    text-align: center;
+}
+#container{
+    display: inline-block;
+}
