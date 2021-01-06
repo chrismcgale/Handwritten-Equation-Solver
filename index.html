@@ -12,7 +12,7 @@
     <p>Equation: <span id="equation"></span> </p>
     <img id="selected-image" src="" />
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src'http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.4.0/fabric.min.js'></script>
 
     <script type="text/javascript">
         var canvas, ctx, flag = false,
@@ -25,24 +25,17 @@
         var x = "black",
             y = 2;
 
-        function init() {
-            canvas = document.getElementById('can');
-            ctx = canvas.getContext("2d");
-            w = canvas.width;
-            h = canvas.height;
-
-            canvas.addEventListener("mousemove", function (e) {
-                findxy('move', e)
-            }, false);
-            canvas.addEventListener("mousedown", function (e) {
-                findxy('down', e)
-            }, false);
-            canvas.addEventListener("mouseup", function (e) {
-                findxy('up', e)
-            }, false);
-            canvas.addEventListener("mouseout", function (e) {
-                findxy('out', e)
-            }, false);
+    <style type='text/css'>
+        #sheet {
+            border:1px solid black;
+        }
+    </style>
+    <script type='text/javascript'>
+        window.onload=function(){
+            var canvas = new fabric.Canvas('sheet');
+            canvas.isDrawingMode = true;
+            canvas.freeDrawingBrush.width = 5;
+            canvas.freeDrawingBrush.color = "#ff0000";
         }
 
         function draw() {
