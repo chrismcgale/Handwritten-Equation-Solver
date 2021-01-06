@@ -1,5 +1,6 @@
 const space = '500px';
 let colour = 'black';
+var stack = [];
 
 // create canvas element and append it to document body
 var canvas = document.createElement('canvas');
@@ -89,4 +90,6 @@ function clear() {
         }
 }
 
+function submit() {
+  
 
