@@ -38,10 +38,11 @@ function createGrid(num){
         container.appendChild(row);
         i++;
     }
-    sketch();
+    
+   sketch();
 }
 
-createGrid(64);
+createGrid(45);
 
 function sketch(){
     let cells = document.querySelectorAll('.cell');
@@ -61,25 +62,26 @@ function createButtons(){
     clear_btn.setAttribute('class', 'clear_btn');
     buts.appendChild(clear_btn);
 
-    const resize_btn = document.createElement('button');
-    resize_btn.textContent = "resize";
-    resize_btn.setAttribute('class', 'resize_btn');
-    buts.appendChild(resize_btn);
+    const submit = document.createElement('button');
+    submit.textContent = "submit";
+    submit.setAttribute('class', 'submit');
+    buts.appendChild(submit);
 
-    const randomColour = document.createElement('button');
-    randomColour.textContent = "random colour";
-    randomColour.setAttribute('class', 'randomColour');
-    buts.appendChild(randomColour);
+    const back = document.createElement('button');
+    back.textContent = "back";
+    back.setAttribute('class', 'back');
+    buts.appendChild(back);
 
-    const blackColour = document.createElement('button');
-    blackColour.textContent = "black";
-    blackColour.setAttribute('class', 'black');
-    buts.appendChild(blackColour);
+    const reset = document.createElement('button');
+    reset.textContent = "reset";
+    reset.setAttribute('class', 'reset');
+    buts.appendChild(reset);
+    
+    const solve = document.createElement('solve');
+    solve.textContent = "solve";
+    solve.setAttribute('class', 'solve');
+    buts.appendChild(solve);
 
-    const changeColour = document.createElement('button');
-    changeColour.textContent = "change";
-    changeColour.setAttribute('class', 'change');
-    buts.appendChild(changeColour);
 }
 
 createButtons();
