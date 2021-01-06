@@ -90,7 +90,5 @@ function clear() {
             document.getElementById("canvasimg").style.display = "none";
         }
 }
-
-function submit() {
   
 
