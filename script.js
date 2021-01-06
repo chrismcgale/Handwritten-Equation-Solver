@@ -92,7 +92,8 @@ clr.addEventListener('mousedown', function(){
 const sub = document.querySelector('.submit');
 sub.addEventListener('mousedown, function(){
                      //send canvas to model
-                     equation.push()
+                     equation.push(result);
+
                      });
 
 const back = document.querySelector('.back');
