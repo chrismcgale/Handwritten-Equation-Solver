@@ -77,7 +77,7 @@ function createButtons(){
     reset.setAttribute('class', 'reset');
     buts.appendChild(reset);
     
-    const solve = document.createElement('solve');
+    const solve = document.createElement('button');
     solve.textContent = "solve";
     solve.setAttribute('class', 'solve');
     buts.appendChild(solve);
