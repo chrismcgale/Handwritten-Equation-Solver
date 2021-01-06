@@ -17,6 +17,7 @@ resize();
 // last known position
 var pos = { x: 0, y: 0 };
 
+window.addEventListener('resize', resize);
 document.addEventListener('mousemove', draw);
 document.addEventListener('mousedown', setPosition);
 document.addEventListener('mouseenter', setPosition);
