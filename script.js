@@ -14,7 +14,7 @@ resize();
 var pos = { x: 0, y: 0 };
 
 window.addEventListener('resize', resize);
-document.addEventListener('mousemove', draw);
+
 document.addEventListener('mousedown', setPosition);
 document.addEventListener('mouseenter', setPosition);
 
@@ -30,7 +30,7 @@ function resize() {
   ctx.canvas.height = window.innerHeight - 100;
 }
 
-function draw(e) {
+ctx.addEventListener('mousemove', function draw(e) {
   // mouse left button must be pressed
   if (e.buttons !== 1) return;
 
@@ -45,7 +45,7 @@ function draw(e) {
   ctx.lineTo(pos.x, pos.y); // to
 
   ctx.stroke(); // draw it!
-}
+});
 
 
 
