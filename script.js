@@ -84,3 +84,35 @@ function createButtons(){
 createButtons();
 
 
+const clr = document.querySelector('.clear_btn');
+clr.addEventListener('mousedown', function(){
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+});
+
+const sub = document.querySelector('.submit');
+sub.addEventListener('mousedown, function(){
+                     //send canvas to model
+                     equation.push(result);
+
+                     });
+
+const back = document.querySelector('.back');
+back.addEventListener('mousedown, function(){
+                      if(!equation.isempty()){
+                      equation.pop();
+}
+});
+
+const reset = document.querySelector('.reset');
+reset.addEventListener('mousedown, function(){
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          equation.clear();
+});
+
+const solve = document.querySelector('.solve');
+solve.addEventListener('mousedown, function(){
+          //Send equation to scan/parse/galaxy
+});
+
+
+
