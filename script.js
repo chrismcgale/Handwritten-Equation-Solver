@@ -84,11 +84,3 @@ function createButtons(){
 createButtons();
 
 
-const clr = document.querySelector('.clear_btn');
-clr.addEventListener('mousedown', function(){
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-});
-
-
-
-
