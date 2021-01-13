@@ -1,6 +1,5 @@
-const space = '500px';
 let colour = 'black';
-global var equation = [];
+
 
 // create canvas element and append it to document body
 var canvas = document.createElement('canvas');
