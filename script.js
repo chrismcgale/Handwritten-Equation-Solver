@@ -1,12 +1,9 @@
-let colour = 'black';
-
-
 // create canvas element and append it to document body
 var canvas = document.createElement('canvas');
 document.body.appendChild(canvas);
 
 // some hotfixes... ( ≖_≖)
-document.body.style.margin = 0;
+document.body.style.margin = 100;
 canvas.style.position = 'fixed';
 
 // get canvas 2D context and set him correct size
@@ -29,8 +26,8 @@ function setPosition(e) {
 }
 
 function resize() {
-  ctx.canvas.width = window.innerWidth;
-  ctx.canvas.height = window.innerHeight;
+  ctx.canvas.width = window.innerWidth - 100;
+  ctx.canvas.height = window.innerHeight - 100;
 }
 
 function draw(e) {
@@ -82,36 +79,6 @@ function createButtons(){
 
 createButtons();
 
-
-const clr = document.querySelector('.clear_btn');
-clr.addEventListener('mousedown', function(){
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-});
-
-const sub = document.querySelector('.submit');
-sub.addEventListener('mousedown, function(){
-                     //send canvas to model
-                     equation.push(result);
-
-                     });
-
-const back = document.querySelector('.back');
-back.addEventListener('mousedown, function(){
-                      if(!equation.isempty()){
-                      equation.pop();
-}
-});
-
-const reset = document.querySelector('.reset');
-reset.addEventListener('mousedown, function(){
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          equation.clear();
-});
-
-const solve = document.querySelector('.solve');
-solve.addEventListener('mousedown, function(){
-          //Send equation to scan/parse/galaxy
-});
 
 
 
