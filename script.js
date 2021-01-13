@@ -48,37 +48,4 @@ function draw(e) {
 }
 
 
-function createButtons(){
-    const buts = document.querySelector('#btn_ctn');
-    const clear_btn = document.createElement('button');
-    clear_btn.textContent = "clear";
-    clear_btn.setAttribute('class', 'clear_btn');
-    buts.appendChild(clear_btn);
-
-    const submit = document.createElement('button');
-    submit.textContent = "submit";
-    submit.setAttribute('class', 'submit');
-    buts.appendChild(submit);
-
-    const back = document.createElement('button');
-    back.textContent = "back";
-    back.setAttribute('class', 'back');
-    buts.appendChild(back);
-
-    const reset = document.createElement('button');
-    reset.textContent = "reset";
-    reset.setAttribute('class', 'reset');
-    buts.appendChild(reset);
-    
-    const solve = document.createElement('button');
-    solve.textContent = "solve";
-    solve.setAttribute('class', 'solve');
-    buts.appendChild(solve);
-
-}
-
-createButtons();
-
-
-
 
