@@ -2,6 +2,7 @@ var mousePressed = false;
 var lastX;
 var lastY;
 var ctx;
+var equation = "test";
 
 function Init() {
     ctx = document.getElementById('myCanvas').getContext("2d");
@@ -59,3 +60,9 @@ function Solve(){
 function Submit(){
 	//Sendd to keras and then push to equation
 }
+
+function print(){
+	$("#display").val(equation);
+}
+
+print();
