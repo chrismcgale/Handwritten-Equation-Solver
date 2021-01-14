@@ -61,8 +61,8 @@ function Submit(){
 	//Sendd to keras and then push to equation
 }
 
-function print(){
+function Print(){
 	$("#display").val(equation);
 }
 
-print();
+Print();
