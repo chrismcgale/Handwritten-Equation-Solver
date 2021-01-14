@@ -2,7 +2,7 @@ var mousePressed = false;
 var lastX;
 var lastY;
 var ctx;
-var equation = "test";
+var equation = "";
 
 function Init() {
     ctx = document.getElementById('myCanvas').getContext("2d");
@@ -46,11 +46,11 @@ function Clear() {
 
 function Reset(){
 	ctx.clearRect(0, 0, 500, 500);
-	//clear equation
+	equation = "";
 }
 
 function Back(){
-	//if equation isn't empty pop
+	equation = equation.substring(0, equation.length - 1);
 }
 
 function Solve(){
@@ -59,10 +59,9 @@ function Solve(){
 
 function Submit(){
 	//Sendd to keras and then push to equation
+	//equation += result
 }
 
 function Print(){
 	$("#display").val(equation);
 }
-
-Print();
