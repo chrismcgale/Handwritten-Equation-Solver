@@ -1,5 +1,7 @@
 var mousePressed = false;
-var lastX, lastY;
+var lastX;
+var lastY;
+var ctx;
 
 function Init() {
     ctx = document.getElementById('myCanvas').getContext("2d");
