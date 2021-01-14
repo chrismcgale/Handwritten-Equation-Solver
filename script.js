@@ -42,3 +42,20 @@ function Draw(x, y, isDown) {
 function Clear() {
    ctx.clearRect(0, 0, 500, 500);
 }
+
+function Reset(){
+	ctx.clearRect(0, 0, 500, 500);
+	//clear equation
+}
+
+function Back(){
+	//if equation isn't empty pop
+}
+
+function Solve(){
+	//Send equation to c++
+}
+
+function Submit(){
+	//Sendd to keras and then push to equation
+}
