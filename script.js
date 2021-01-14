@@ -39,6 +39,6 @@ function Draw(x, y, isDown) {
     lastX = x; lastY = y;
 }
 	
-function clear() {
+function Clear() {
    ctx.clearRect(0, 0, 500, 500);
 }
