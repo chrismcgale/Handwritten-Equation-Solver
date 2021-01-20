@@ -1,4 +1,4 @@
-47
+28
 BOF
 EOF
 -
@@ -17,35 +17,16 @@ EOF
 7
 8
 9
-A
-B 
-C
 cos
-d
 div
-e 
 forward_slash
-geq
-gt
-in
-infty
-leq
 lim
 log
-lt
-neq
 pi
-pm
 sin
 sqrt
 sum
 times
-u
-v
-w
-X
-y
-z
 3
 S 
 expr
@@ -59,20 +40,12 @@ expr expr + term
 expr expr times term
 expr expr div term
 expr expr forward_slash term
-expr expr = term
-expr expr lt term
-expr expr leq term
-expr expr gt term
-expr expr geq term
-expr expr neq term
 expr sum expr
 expr lim expr
 expr log expr
 expr cos expr
 expr sin expr
 expr sqrt expr
-expr in expr
-expr pm expr
 term 0
 term 1
 term 2
@@ -83,17 +56,5 @@ term 6
 term 7
 term 8
 term 9
-term A
-term B
-term C 
-term d 
-term e
-term infty
 term pi
-term u
-term v
-term w
-term X
-term y
-term z
 term (expr)
