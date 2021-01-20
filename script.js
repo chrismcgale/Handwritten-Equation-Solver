@@ -1,3 +1,6 @@
+import * as tf from '@tensorflow/tfjs'
+const model = await tf.loadLayersModel('https://foo.bar/tfjs_artifacts/model.json');
+
 var mousePressed = false;
 var lastX;
 var lastY;
@@ -58,22 +61,9 @@ function Solve(){
 }
 
 function Submit(){
-	 // Generate the image data
-    var Pic = document.getElementById("myCanvas").toDataURL("image/png");
-    Pic = Pic.replace(/^data:image\/(png|jpg);base64,/, "")
-
-    // Sending the image data to Server
-    $.ajax({
-        type: 'POST',
-        url: 'Save_Picture.aspx/UploadPic',
-        data: '{ "imageData" : "' + Pic + '" }',
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        success: function (msg) {
-            alert("Done, Picture Uploaded.");
-        }
-    });
-	//equation += result
+	term = tf.browser.fromPixels(ctx);
+	result = model.predict(term);
+	equation += result
 }
 
 function Print(){
