@@ -1,5 +1,8 @@
 import * as tf from '@tensorflow/tfjs'
 const model = await tf.loadLayersModel('https://foo.bar/tfjs_artifacts/model.json');
+const scan = require('./parse_and_solve/scan');
+const parse = require('./parse_and_solve/parse');
+const galaxy = require('./parse_and_solve/galaxy');
 
 var mousePressed = false;
 var lastX;
@@ -57,7 +60,14 @@ function Back(){
 }
 
 function Solve(){
-	//Send equation to c++
+    const sca = scan('./scan ' + equation, {timeout: 20000}, function(error, scanned, stderr) {
+        const par = parse('./parse " + scanned, {timeout: 20000}, function(error, parsed, stderr) {
+			   const gala = galaxy('./galaxy " + parsed, {timeout: 20000}, function(error, answer, stderr) {
+                               document.getElementById("display").innerHTML = answer;
+			   }
+			   }
+			   }
+		     equation = "";
 }
 
 function Submit(){
