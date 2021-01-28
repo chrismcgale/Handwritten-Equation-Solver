@@ -1,4 +1,4 @@
-28
+27
 BOF
 EOF
 -
@@ -6,7 +6,6 @@ EOF
 (
 )
 +
-=
 0
 1
 2
@@ -18,7 +17,6 @@ EOF
 8
 9
 cos
-div
 forward_slash
 lim
 log
@@ -38,7 +36,6 @@ expr term
 expr expr - term
 expr expr + term
 expr expr times term
-expr expr div term
 expr expr forward_slash term
 expr sum expr
 expr lim expr
@@ -58,17 +55,38 @@ term 8
 term 9
 term pi
 term (expr)
-
+11
+28
 0 BOF shift 1
-1 LPAREN shift 2
-1 term shift 3
-1 expr shift 4
-2 LPAREN shift 2
-2 term shift 3
-3 term shift
-3 EOF reduce 1
-3 - reduce 1
-3 + reduce 1
-3 times reduce 1
-3 forward_slash reduce 1
-3 RPAREN reduce 1
+1 id shift 2
+1 ( shift 3
+1 term shift 4
+1 expr shift 10
+2 - reduce 3
+2 ) reduce 3
+2 EOF reduce 3
+3 id shift 2
+3 term shift 4
+3 ( shift 3
+3 expr shift 7
+4 ) reduce 1
+4 - reduce 1
+4 EOF reduce 1
+6 ( shift 3
+6 term shift 8
+6 id shift 2
+7 - shift 6
+7 ) shift 9
+8 EOF reduce 2
+8 - reduce 2
+8 ) reduce 2
+9 - reduce 4
+9 ) reduce 4
+9 EOF reduce 4
+10 EOF shift 5
+10 - shift 6
+
+
+
+
+
