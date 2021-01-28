@@ -13,16 +13,6 @@
 using namespace std;
 /* Scans a single line of input and produces a list of tokens.
  *
- * Scan returns tokens with the following kinds:
- * ID: identifiers and keywords.
- * LABEL: labels (identifiers ending in a colon).
- * WORD: the special ".word" keyword.
- * COMMA: a comma.
- * LPAREN: a left parenthesis.
- * RPAREN: a right parenthesis.
- * INT: a signed or unsigned 32-bit integer written in decimal.
- * HEXINT: an unsigned 32-bit integer written in hexadecimal.
- * REG: a register between $0 and $31.
  */
 
 /* A scanned token produced by the scanner.
@@ -39,22 +29,13 @@ using namespace std;
 class Token {
 	public:
 		enum Kind {
-			ID = 0,
 			NUM,
 			LPAREN,
 			RPAREN,
-			INT,
 			EQ,
-			NE,
-			LT,
-			GT,
-			LE,
-			GE,
-			PLUS,
-			MINUS,
-			TIMES,
-			FORWARD_SLASH,
-			DIV,
+			DOUBLE,
+			SINGLE,
+			PI,
 		};
 
 	private:
@@ -67,13 +48,6 @@ class Token {
 		Kind getKind() const;
 		const std::string &getLexeme() const;
 
-		/* Only works on tokens of type INT, HEXINT, or REG
-		 *
-		 * Although all results will be integers, this function
-		 * returns a long since the result may be either signed
-		 * or unsigned, and thus may lie anywhere in the range
-		 * -2147483648 .. 4294967295
-		 */
 		int64_t toLong() const;
 
 };
@@ -111,39 +85,14 @@ Token::Token(Token::Kind kind, std::string lexeme):
 
 	std::ostream &operator<<(std::ostream &out, const Token &tok) {
 		switch (tok.getKind()) {
-			case Token::ID:         out << "ID";         break;
 			case Token::NUM:      out << "NUM";      break;
-			case Token::LBRACE:       out << "LBRACE";       break;
-			case Token::RBRACE:       out << "RBRACE";       break;
-			case Token::RETURN:       out << "RETURN";       break;
-			case Token::IF:       out << "IF";       break;
-			case Token::ELSE:       out << "ELSE";       break;
-			case Token::COMMA:      out << "COMMA";      break;
 			case Token::LPAREN:     out << "LPAREN";     break;
 			case Token::RPAREN:     out << "RPAREN";     break;
-			case Token::WHILE:       out << "WHILE";       break;
-			case Token::PRINTLN:       out << "PRINTLN";       break;
-			case Token::WAIN:       out << "WAIN";       break;
-			case Token::BECOMES:       out << "BECOMES";       break;
-			case Token::INT:       out << "INT";       break;
-			case Token::EQ:       out << "EQ";       break;
-			case Token::NE:       out << "NE";       break;
-			case Token::LT:       out << "LT";       break;
-					      case Token::GT:       out << "GT";       break;
-								    case Token::LE:       out << "LE";       break;
-			case Token::GE:       out << "GE";       break;
 			case Token::PLUS:       out << "PLUS";       break;
 			case Token::MINUS:       out << "MINUS";       break;
 			case Token::STAR:       out << "STAR";       break;
 			case Token::SLASH:       out << "SLASH";       break;
 			case Token::PCT:       out << "PCT";       break;
-			case Token::SEMI:       out << "SEMI";       break;
-			case Token::NEW:       out << "NEW";       break;
-			case Token::DELETE:        out << "DELETE";        break;
-			case Token::LBRACK:     out << "LBRACK";     break;
-			case Token::RBRACK:        out << "RBRACK";        break;
-			case Token::AMP: out << "AMP"; break;
-			case Token::NULl:    out << "NULL";    break;
 		}
 		out << " " << tok.getLexeme();
 
@@ -179,81 +128,22 @@ ScanningFailure::ScanningFailure(std::string message):
 		public:
 			enum State {
 				// States that are also kinds
-				ID = 0,
 				NUM,
 				LPAREN,
 				RPAREN,
-				LBRACE,
-				RBRACE,
-				RETURN,
-				IF,
-				ELSE,
-				WHILE,
-				PRINTLN,
-				WAIN,
-				BECOMES,
-				INT,
 				EQ,
-				NE,
-				LT,
-				GT,
-				LE,
-				GE,
 				PLUS,
 				STAR,
 				SLASH,
 				PCT,
-				COMMA,
-				SEMI,
-				n,
-				ne,
-				NEW,
-				DELETE,
-				LBRACK,
-				RBRACK,
-				AMP,
-				NULl,
-				WHITESPACE,
-				COMMENT,
 				// States that are not also kinds
 				FAIL,
 				START,
 				ZERO,
 				MINUS,
-				I,
-				IN,
-				E,
-				EL,
-				ELS,
-				W,
-				WH,
-				WHI,
-				WHIL,
-				D,
-				DE,
-				DEL,
-				DELE,
-				DELET,
-				N,
-				NU,
-				NUL,
-				WA,
-				WAI,
-				P,
-				PR,
-				PRI,
-				PRIN,
-				PRINT,
-				PRINTL,
-				R,
-				RE,
-				RET,
-				RETU,
-				RETUR,
-				NOT,
 
 
-				LARGEST_STATE = NOT
+				LARGEST_STATE = MINUS
 			};
 
 		private:
@@ -275,74 +165,16 @@ ScanningFailure::ScanningFailure(std::string message):
 			 */
 			Token::Kind stateToKind(State s) const {
 				switch(s) {
-					case ID:         return Token::ID;
 					case NUM:      return Token::NUM;
-					case LBRACE:      return Token::LBRACE;
-					case RBRACE:      return Token::RBRACE;
-					case R:         return Token::ID;
-					case RE:         return Token::ID;
-					case RET:         return Token::ID;
-					case RETU:         return Token::ID;
-					case RETUR:         return Token::ID;
-					case RETURN:      return Token::RETURN;
-					case I:         return Token::ID;
-					case IF:      return Token::IF;
-					case E:         return Token::ID;
-					case EL:         return Token::ID;
-					case ELS:         return Token::ID;
-					case ELSE:      return Token::ELSE;
-					case W:         return Token::ID;
-					case WH:         return Token::ID;
-					case WHI:         return Token::ID;
-					case WHIL:         return Token::ID;
-					case WHILE:      return Token::WHILE;
-					case P:         return Token::ID;
-					case PR:         return Token::ID;
-					case PRI:         return Token::ID;
-					case PRIN:         return Token::ID;
-					case PRINT:         return Token::ID;
-					case PRINTL:         return Token::ID;
-					case PRINTLN:      return Token::PRINTLN;
-					case WA:         return Token::ID;
-					case WAI:         return Token::ID;
-					case WAIN:      return Token::WAIN;
-					case BECOMES:      return Token::BECOMES;
-					case COMMA:      return Token::COMMA;
 					case LPAREN:     return Token::LPAREN;
 					case RPAREN:     return Token::RPAREN;
-					case RBRACK: return Token::RBRACK;
-					case IN:         return Token::ID;
-					case INT:        return Token::INT;
 					case ZERO:       return Token::NUM;
 					case EQ:     return Token::EQ;
-					case NE:        return Token::NE;
-					case LT:        return Token::LT;
-					case GT:        return Token::GT;
-					case LE:        return Token::LE;
-					case GE:        return Token::GE;
 					case PLUS:        return Token::PLUS;
 					case MINUS:        return Token::MINUS;
 					case STAR:        return Token::STAR;
 					case SLASH:        return Token::SLASH;
 					case PCT:        return Token::PCT;
-					case SEMI:        return Token::SEMI;
-					case N:         return Token::ID;
-							case n:         return Token::ID;
-					case ne:         return Token::ID;
-					case NEW:        return Token::NEW;
-					case D:         return Token::ID;
-					case DE:         return Token::ID;
-					case DEL:         return Token::ID;
-					case DELE:         return Token::ID;
-					case DELET:         return Token::ID;
-					case DELETE:        return Token::DELETE;
-					case LBRACK:        return Token::LBRACK;
-					case AMP: return Token::AMP;
-					case NU:         return Token::ID;
-					case NUL:         return Token::ID;
-					case NULl:    return Token::NULl;
-					case WHITESPACE:    return Token::WHITESPACE;
-					case COMMENT:    return Token::COMMENT;
 					default: throw ScanningFailure("ERROR: Cannot convert state to kind.");
 				}
 			}
@@ -403,68 +235,13 @@ ScanningFailure::ScanningFailure(std::string message):
 					ZERO,
 					LPAREN,
 					RPAREN,
-					LBRACE,
-					RBRACE,
-					R,
-					RE,
-					RET,
-					RETU,
-					RETUR,
-					RETURN,
-					I,
-					IF,
-					E,
-					EL,
-					ELS,
-					ELSE,
-					W,
-					WH,
-					WHI,
-					WHIL,
-					WHILE,
-					P,
-					PR,
-					PRI,
-					PRIN,
-					PRINT,
-					PRINTL,
-					PRINTLN,
-					W,
-					WA,
-					WAI,
-					WAIN,
-					BECOMES,
-					IN,
-					INT,
 					EQ,
-					NE,
-					LT,
-					GT,
-					LE,
-					GE,
 					PLUS,
 					MINUS,
 					STAR,
 					SLASH,
 					PCT,
-					COMMA,
-					SEMI,
-					N,
-					n,
-					ne,
-					NEW,
-					D,
-					DE,
-					DEL,
-					DELE,
-					DELET,
-					DELETE,
-					LBRACK,
-					RBRACK,
-					AMP,
-					NU,
-					NUL,
-					NULl, WHITESPACE, COMMENT};
+					};
 				//Non-accepting states are DOT, MINUS, ZEROX, DOLLARS, START
 
 				// Initialize transitions for the DFA
@@ -482,106 +259,12 @@ ScanningFailure::ScanningFailure(std::string message):
 				registerTransition(START, "0", ZERO);
 				registerTransition(START, "123456789", NUM);
 				registerTransition(START, "-", MINUS);
-				registerTransition(START, ";", SEMI);
-				registerTransition(START, isspace, WHITESPACE);
 				registerTransition(START, "%", PCT);
 				registerTransition(START, ",", COMMA);
 				registerTransition(START, "(", LPAREN);
 				registerTransition(START, ")", RPAREN);
-				registerTransition(START, "<", LT);
-				registerTransition(START, ">", GT);
-				registerTransition(START, "[", LBRACK);
-				registerTransition(START, "]", RBRACK);
-				registerTransition(START, "{", LBRACE);
-				registerTransition(START, "}", RBRACE);
 				registerTransition(START, "!", NOT);
 				registerTransition(START, "&", AMP);
-				registerTransition(START, "i", I);
-				registerTransition(I, isalnum, ID);
-				registerTransition(I, "f", IF); 
-				registerTransition(IF, isalnum, ID);
-				registerTransition(I, "n", IN);
-				registerTransition(IN, isalnum, ID);
-				registerTransition(IN, "t", INT);
-				registerTransition(INT, isalnum, ID);
-				registerTransition(START, "r", R);
-				registerTransition(R, isalnum, ID);
-				registerTransition(R, "e", RE);
-				registerTransition(RE, isalnum, ID);
-				registerTransition(RE, "t", RET);
-				registerTransition(RET, isalnum, ID);
-				registerTransition(RET, "u", RETU);
-				registerTransition(RETU, isalnum, ID);
-				registerTransition(RETU, "r", RETUR);
-				registerTransition(RETUR, isalnum, ID);
-				registerTransition(RETUR, "n", RETURN);
-				registerTransition(RETURN, isalnum, ID);
-				registerTransition(START, "w", W);
-				registerTransition(W, isalnum, ID);
-				registerTransition(W, "h", WH);
-				registerTransition(WH, isalnum, ID);
-				registerTransition(WH, "i", WHI);
-				registerTransition(WHI, isalnum, ID);
-				registerTransition(WHI, "l", WHIL);
-				registerTransition(WHIL, isalnum, ID);
-				registerTransition(WHIL, "e", WHILE);
-				registerTransition(WHILE, isalnum, ID);
-				registerTransition(START, "e", E);
-				registerTransition(E, isalnum, ID);
-				registerTransition(E, "l", EL);
-				registerTransition(EL, isalnum, ID);
-				registerTransition(EL, "s", ELS);
-				registerTransition(ELS, isalnum, ID);
-				registerTransition(ELS, "e", ELSE);
-				registerTransition(ELSE, isalnum, ID);
-				registerTransition(START, "p", P);
-				registerTransition(P, isalnum, ID);
-				registerTransition(P, "r", PR);
-				registerTransition(PR, isalnum, ID);
-				registerTransition(PR, "i", PRI);
-				registerTransition(PRI, isalnum, ID);
-				registerTransition(PRI, "n", PRIN);
-				registerTransition(PRIN, isalnum, ID);
-				registerTransition(PRIN, "t", PRINT);
-				registerTransition(PRINT, isalnum, ID);
-				registerTransition(PRINT, "l", PRINTL);
-				registerTransition(PRINTL, isalnum, ID);
-				registerTransition(PRINTL, "n", PRINTLN);
-				registerTransition(PRINTLN, isalnum, ID);
-				registerTransition(START, "w", W);
-				registerTransition(W, "a", WA);
-				registerTransition(WA, isalnum, ID);
-				registerTransition(WA, "i", WAI);
-				registerTransition(WAI, isalnum, ID);
-				registerTransition(WAI, "n", WAIN);
-				registerTransition(WAIN, isalnum, ID);
-				registerTransition(START, "d", D);
-				registerTransition(D, isalnum, ID);
-				registerTransition(D, "e", DE);
-				registerTransition(DE, isalnum, ID);
-				registerTransition(DE, "l", DEL);
-				registerTransition(DEL, isalnum, ID);
-				registerTransition(DEL, "e", DELE);
-				registerTransition(DELE, isalnum, ID);
-				registerTransition(DELE, "t", DELET);
-				registerTransition(DELET, isalnum, ID);
-				registerTransition(DELET, "e", DELETE);
-				registerTransition(DELETE, isalnum, ID);
-				registerTransition(START, "n", n);
-				registerTransition(n, isalnum, ID);
-				registerTransition(n, "e", ne);
-				registerTransition(ne, isalnum, ID);
-				registerTransition(ne, "w", NEW);
-				registerTransition(NEW, isalnum, ID);
-				registerTransition(START, "N", N);
-                                registerTransition(N, isalnum, ID);
-				registerTransition(N, "U", NU);
-				registerTransition(NU, isalnum, ID);
-				registerTransition(NU, "L", NUL);
-				registerTransition(NUL, isalnum, ID);
-				registerTransition(NUL, "L", NULl);
-				registerTransition(NULl, isalnum, ID);
-				registerTransition(ID, isalnum, ID);
 				registerTransition(BECOMES, "=", EQ);
 				registerTransition(LT, "=", LE);
 				registerTransition(GT, "=", GE);
@@ -650,10 +333,7 @@ std::vector<Token> scan(const std::string &input) {
 	std::vector<Token> newTokens;
 
 	for (auto &token : tokens) {
-		if (token.getKind() != Token::WHITESPACE
-				&& token.getKind() != Token::Kind::COMMENT) {
 			newTokens.push_back(token);
-		}
 	}
 
 	return newTokens;
