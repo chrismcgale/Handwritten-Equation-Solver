@@ -62,9 +62,9 @@ function Solve(){
         const par = parse('./parse ' + scanned, {timeout: 20000}, function(error, parsed, stderr) {
 			   const gala = galaxy('./galaxy ' + parsed, {timeout: 20000}, function(error, answer, stderr) {
                                document.getElementById("display").innerHTML = answer;
-			   }
-			   }
-			   }
+			   })
+			   })
+			   })
 		     equation = "";
 }
 
