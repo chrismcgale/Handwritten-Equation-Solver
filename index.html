@@ -7,8 +7,8 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script type ="text/javascript" src="script.js"></script>
     <button id="Clear" onclick="Clear(); Print();"> Clear</button>
-    <button id="Submit" onclick="Submit";> Submit Image</button>
-    <button id="Solve" onclick="Solve">Solve Equation</button>
+    <button id="Submit" onclick="Submit(); Print();"> Submit Image</button>
+    <button id="Solve" onclick="Solve(); Print();">Solve Equation</button>
     <button id="Back" onclick="Back(); Print();">Back</button>
     <button id="Reset" onclick="Reset(); Print();">Reset Equation</button>
     <meta charset="UTF-8">
@@ -17,48 +17,6 @@
 </head>
     
 <body onload="Init();">
-    
-    <script>
-        async function trainModel(xTrain, yTrain, xTest, yTest){
-            const model = tf.sequential();
-            const learningRate = 0.1;
-            const numberOfEpochs = 40;
-            const optimizer = tf.train.adam(learningRate);
-            
-            model.add(tf.layers.dense(
-                {units:10, activation: 'sigmoid', InputShape: [xTrain,shape[1]]}));
-            
-            model.add(tf.layers.dense(
-                {units:3, activation: 'softmax}));
-                 
-            model.compile({
-                 optimizer: optimizer,
-                 loss: 'categoricalCrossentropy',
-                 metrics: ['accuracy']});
-                      
-            const history = await model.fit(xTrain, yTrain,
-                      { epochs: numberOfEpochs, validationData: [xTest, yTest],
-                        callbacks: {
-                            onEpochEnd: async (epoch, logs) => {
-                               console.log("Epoch: " + epoch + " Logs:" + logs.loss);
-                               await tfNextFrame();
-            }
-        }
-        });
-        return model
-            
-            
-        }
-        async function guess(){
-            const [xTrain, yTrain, xTest, yTest] = getNumData(.2);
-            
-            model = await trainModel(xTrain, yTrain, xTest, yTest);
-        }
-        
-        
-        
-        guess();
-    </script>
     
   <div align="center">
       <canvas id="myCanvas" width="500" height="500" style="border:2px solid black"></canvas>
