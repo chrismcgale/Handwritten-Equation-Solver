@@ -30,30 +30,11 @@ S
 expr
 term
 S
-45
+5
 S BOF expr EOF
 expr term
 expr expr - term
-expr expr + term
-expr expr times term
-expr expr forward_slash term
-expr sum expr
-expr lim expr
-expr log expr
-expr cos expr
-expr sin expr
-expr sqrt expr
-term 0
-term 1
-term 2
-term 3
-term 4
-term 5
-term 6
-term 7
-term 8
-term 9
-term pi
+term id
 term (expr)
 11
 28
@@ -85,6 +66,7 @@ term (expr)
 9 EOF reduce 4
 10 EOF shift 5
 10 - shift 6
+
 
 
 
