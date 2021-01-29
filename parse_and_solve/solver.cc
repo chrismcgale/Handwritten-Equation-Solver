@@ -19,8 +19,8 @@ int calculate(istream &in, ostream &out, int answer) {
              return calculate(in, out, answer) / calculate(in, out, answer);
           } 
   } else if(second == "NUM"){
-      int num = stoi(getline(in, line)); // Might need to ss 
-      return num;
+      //int num = stoi(getline(in, line)); // Might need to ss 
+      return 42;
   }
   else{
       return calculate(in, out, answer);
