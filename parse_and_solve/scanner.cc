@@ -32,9 +32,7 @@ class Token {
 			NUM,
 			LPAREN,
 			RPAREN,
-			EQ,
-			DOUBLE,
-			SINGLE,
+			MINUS,
 			PI,
 		};
 
@@ -251,7 +249,6 @@ ScanningFailure::ScanningFailure(std::string message):
 					}
 				}
 
-				registerTransition(START, isalpha, ID);
 				registerTransition(START, "+", PLUS);
 				registerTransition(START, "*", STAR);
 				registerTransition(START, "/", SLASH);
@@ -271,8 +268,6 @@ ScanningFailure::ScanningFailure(std::string message):
 				registerTransition(NOT, "=", NE);
 		                registerTransition(SLASH, "/", COMMENT);
 				registerTransition(NUM, isdigit,  NUM);
-				registerTransition(COMMENT, [](int c) -> int { return c != '\n'; },
-						COMMENT);
 				registerTransition(WHITESPACE, isspace, WHITESPACE);
 			}
 
