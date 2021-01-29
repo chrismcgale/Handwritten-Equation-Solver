@@ -2,13 +2,13 @@ import * as tf from '@tensorflow/tfjs'
 const model = await tf.loadLayersModel('https://foo.bar/tfjs_artifacts/model.json');
 const scan = require('./parse_and_solve/scan');
 const parse = require('./parse_and_solve/parse');
-const galaxy = require('./parse_and_solve/galaxy');
+const galaxy = require('./parse_and_solve/solver');
 
 var mousePressed = false;
 var lastX;
 var lastY;
 var ctx;
-var equation = "";
+var equation = "52 - 10 - 13";
 
 function Init() {
     ctx = document.getElementById('myCanvas').getContext("2d");
