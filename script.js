@@ -54,8 +54,11 @@ function Reset(){
 }
 
 function Back(){
+	if( equation.length != 0){
 	equation = equation.substring(0, equation.length - 1);
 }
+}
+	
 
 function Solve(){
     const sca = scan('./scan ' + equation, {timeout: 20000}, function(error, scanned, stderr) {
