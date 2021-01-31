@@ -75,7 +75,7 @@ function Solve(){
 }
 
 function Submit(){
-	term = tf.browser.fromPixels(ctx);
+	term = tf.browser.fromPixels(document.getElementById('myCanvas'));
 	result = model.predict(term);
 	equation += result
 }
