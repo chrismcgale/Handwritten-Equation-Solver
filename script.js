@@ -1,3 +1,6 @@
+import * as tf from '@tensorflow/tfjs';
+const model = await tf.loadLayersModel('https://foo.bar/tfjs_artifacts/model.json');
+
 const scan = require('./parse_and_solve/scan');
 const parse = require('./parse_and_solve/parse');
 const galaxy = require('./parse_and_solve/solver');
