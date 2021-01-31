@@ -1,4 +1,4 @@
-import * as tf from '@tensorflow/tfjs';
+#import * as tf from '@tensorflow/tfjs';
 #const model = await tf.loadLayersModel('https://foo.bar/tfjs_artifacts/model.json');
 
 const scan = require('./parse_and_solve/scan');
